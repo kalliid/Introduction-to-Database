@@ -107,3 +107,9 @@ update Movie set year=year+25
 where Movie.mID in (select Rating.mID from Rating
 		                   group by Rating.mID
 	                       having avg(stars)>=4);
+
+-- Q4: Remove all ratings where the movie's year is before 1970 or after 2000, and the rating is fewer than 4 stars.
+delete 
+from Rating
+where mID in (select Movie.mID from Movie where year < 1970 or year > 2000)
+           and stars < 4;
